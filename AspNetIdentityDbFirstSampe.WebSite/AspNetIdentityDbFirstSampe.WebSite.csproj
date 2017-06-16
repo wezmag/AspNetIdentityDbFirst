@@ -218,6 +218,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DomainModels\AspNetRole.cs" />
+    <Compile Include="DomainModels\AspNetUser.cs" />
+    <Compile Include="DomainModels\AspNetUserClaim.cs" />
+    <Compile Include="DomainModels\AspNetUserLogin.cs" />
+    <Compile Include="DomainModels\AspNetUserRole.cs" />
+    <Compile Include="DomainModels\MyContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
