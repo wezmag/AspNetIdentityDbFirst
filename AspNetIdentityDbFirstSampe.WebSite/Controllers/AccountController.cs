@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AspNetIdentityDbFirstSampe.WebSite.DomainModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -151,12 +153,17 @@ namespace AspNetIdentityDbFirstSampe.WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new AspNetUser()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -367,7 +374,7 @@ namespace AspNetIdentityDbFirstSampe.WebSite.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new AspNetUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
