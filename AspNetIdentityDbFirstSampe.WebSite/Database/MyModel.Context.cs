@@ -13,7 +13,7 @@ namespace AspNetIdentityDbFirstSampe.WebSite.DomainModels
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MyContext : DbContext
+    public partial class MyContext
     {
         public MyContext()
             : base("name=MyContext")

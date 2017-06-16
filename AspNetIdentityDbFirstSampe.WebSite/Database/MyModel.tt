@@ -31,7 +31,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     var collectionNavigationProperties = typeMapper.GetCollectionNavigationProperties(entity);
     var complexProperties = typeMapper.GetComplexProperties(entity);
 
-    if (propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())
+    if ((propertiesWithDefaultValues.Any() || collectionNavigationProperties.Any() || complexProperties.Any())  && !entity.Name.StartsWith("AspNet"))
     {
 #>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -65,7 +65,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     }
 
     var simpleProperties = typeMapper.GetSimpleProperties(entity);
-    if (simpleProperties.Any())
+    if (simpleProperties.Any() && !entity.Name.StartsWith("AspNet"))
     {
         foreach (var edmProperty in simpleProperties)
         {
@@ -75,7 +75,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         }
     }
 
-    if (complexProperties.Any())
+    if (complexProperties.Any() && !entity.Name.StartsWith("AspNet"))
     {
 #>
 
@@ -89,7 +89,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
     }
 
     var navigationProperties = typeMapper.GetNavigationProperties(entity);
-    if (navigationProperties.Any())
+    if (navigationProperties.Any() && !entity.Name.StartsWith("AspNet"))
     {
 #>
 
